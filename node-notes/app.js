@@ -1,13 +1,8 @@
-
+// 3rd party dependencies //
 const fs = require('fs');
-const note = require('./note.js')
 const _ = require('lodash');
 
+// local dependencies //
+const note = require('./note.js')
 
-fs.appendFile('greetings.txt',`Hello ${note.userName}!\n`,(err)=>{
-    if(err) console.log("Can not write to file");
-});
-
-console.log("isString Returns: ",_.isString("String"));
-var filteredArray = _.uniq(['Sergei',1,2,3,3,'Sergei']);
-console.log("filteredArray is: ",filteredArray);
+// main //

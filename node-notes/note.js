@@ -1,7 +1,8 @@
+// 3rd party dependencies //
 
-const os = require('os');
-var user = os.userInfo();
-module.exports.userName = user.username;
+// local dependencies //
+
+// main //
 module.exports.addNote = () => {
     console.log("Adding note");
 };
