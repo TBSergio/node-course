@@ -1,5 +1,6 @@
 // 3rd party dependencies //
 const fs = require('fs');
+const _ = require('lodash');
 // local dependencies //
 
 // main //
@@ -13,6 +14,10 @@ var fetchNotes = () => {
 };
 var saveNotes = (notes) => {
     fs.writeFileSync('notes-data.json',JSON.stringify(notes));
+};
+var getByTitle = (notes,t) => {
+    for(n in notes)
+        if(notes[n].title == t)  return notes[n];
 };
 
 var addNote = (title, body) => {
@@ -33,10 +38,23 @@ var getAll = () => {
         console.log(notes[n].title,' - ',notes[n].body);
 };
 var removeNote = (title) => {
-    console.log('Removing note titled:',title);
+    var notes = fetchNotes();
+    var n = getByTitle(notes,title);
+    console.log(n);
+    if(n){
+        notes = _.remove(notes,n);
+        console.log(notes);
+        console.log('Removing note titled:',title);
+        //fs.writeFileSync('notes-data.json',notes);
+    }
+    else console.log('404 - Note not found!')
 };
 var readNote = (title) => {
-    console.log('Note',title,'Contains: ');
+    var notes = fetchNotes();
+    var note = getByTitle(notes,title);
+    if(note) console.log('Note',note.title,'Contains: ',note.body);
+    else     console.log('404 - Note not found!')
+        
 };
 
 module.exports = {
