@@ -12,7 +12,9 @@ var command = process.argv[2];
 
 
 if(command === 'add'){
-    note.addNote(argv.title,argv.body);
+    var nt = note.addNote(argv.title,argv.body);
+    if (nt){console.log('Adding note titled: ',nt.title,'to the list');}
+    else{console.log('could not create a duplicate note');}
 }
 else if (command === 'list'){
     note.getAll();

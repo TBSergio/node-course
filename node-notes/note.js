@@ -1,13 +1,36 @@
 // 3rd party dependencies //
-
+const fs = require('fs');
 // local dependencies //
 
 // main //
+var fetchNotes = () => {
+    try{
+        var noteString=fs.readFileSync('notes-data.json');
+        notes = JSON.parse(noteString);
+        return notes;}
+    catch(e){
+        return [];}
+};
+var saveNotes = (notes) => {
+    fs.writeFileSync('notes-data.json',JSON.stringify(notes));
+};
+
 var addNote = (title, body) => {
-    console.log('Adding note:',title,body);
+    var notes = fetchNotes();
+    var note = {title,body};
+
+    var duplicateNotes = notes.filter((note) => note.title === title);
+    if (duplicateNotes.length === 0){
+        notes.push(note);
+        saveNotes(notes);
+        return note;
+    }
 };
 var getAll = () => {
-    console.log('List of all Notes:');
+    var notes = fetchNotes();
+    console.log('Note List Consists of: ')
+    for(n in notes)
+        console.log(notes[n].title,' - ',notes[n].body);
 };
 var removeNote = (title) => {
     console.log('Removing note titled:',title);
