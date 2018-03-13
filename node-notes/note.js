@@ -39,15 +39,10 @@ var getAll = () => {
 };
 var removeNote = (title) => {
     var notes = fetchNotes();
-    var n = getByTitle(notes,title);
-    console.log(n);
-    if(n){
-        notes = _.remove(notes,n);
-        console.log(notes);
-        console.log('Removing note titled:',title);
-        //fs.writeFileSync('notes-data.json',notes);
-    }
-    else console.log('404 - Note not found!')
+
+    notes = notes.filter((note) => note.title != title);
+    console.log('Removing note titled',title,'from the list - if it exists');
+    saveNotes(notes);
 };
 var readNote = (title) => {
     var notes = fetchNotes();
