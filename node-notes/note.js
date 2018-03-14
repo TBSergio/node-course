@@ -40,16 +40,15 @@ var getAll = () => {
 var removeNote = (title) => {
     var notes = fetchNotes();
 
-    notes = notes.filter((note) => note.title != title);
-    console.log('Removing note titled',title,'from the list - if it exists');
-    saveNotes(notes);
+    var fn = notes.filter((note) => note.title != title);
+    saveNotes(fn);
+
+    return fillteredNotes.length !== notes.length;
 };
 var readNote = (title) => {
     var notes = fetchNotes();
-    var note = getByTitle(notes,title);
-    if(note) console.log('Note',note.title,'Contains: ',note.body);
-    else     console.log('404 - Note not found!')
-        
+    var note = notes.filter((n) => n.title === title);
+    return note[0];
 };
 
 module.exports = {

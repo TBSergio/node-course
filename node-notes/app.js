@@ -20,10 +20,13 @@ else if (command === 'list'){
     note.getAll();
 }
 else if (command === 'remove'){
-    note.removeNote(argv.title);
+    var isRemoved = note.removeNote(argv.title);
+    var message = isRemoved ? `Removed note titled ${title}` : '404 - note not found!'
 }
 else if (command === 'read'){
-    note.readNote(argv.title);
+   var nt = note.readNote(argv.title);
+   if(nt) console.log('Note',nt.title,'Contains: ',nt.body);
+    else    console.log('404 - Note not found!');
 }
 else{
     console.log('Command not found');
